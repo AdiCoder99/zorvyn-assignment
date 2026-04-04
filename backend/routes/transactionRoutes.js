@@ -7,7 +7,7 @@ const transactionRouter = express.Router()
 transactionRouter.post('/add', protect, authorize(['admin']), createTransaction)
 transactionRouter.get('/all', protect, authorize(['admin', 'analyst']), getAllTransactions)
 transactionRouter.put('/update/:id', protect, authorize(['admin']), updateTransaction)
-transactionRouter.delete('/delete/:id', protect, authorize(['admin']), deleteTransaction)
+transactionRouter.put('/delete/:id', protect, authorize(['admin']), deleteTransaction)
 transactionRouter.get('/trash', protect, authorize(['admin']), getDeletedTransactions)
 transactionRouter.put('/restore/:id', protect, authorize(['admin']), restoreTransaction)
 
