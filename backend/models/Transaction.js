@@ -4,13 +4,13 @@ const transactionSchema = new mongoose.Schema({
     amount: {
         type: Number,
         required: true,
-        min: [1, "Amount must be greater than zero"] 
+        min: [1, "Amount must be greater than zero"]
     },
     type: {
         type: String,
         enum: {
             values: ["income", "expense"],
-            message: "{VALUE} is not a supported transaction type" 
+            message: "{VALUE} is not a supported transaction type"
         },
         required: [true, "Please specify if this is income or expense"]
     },
@@ -31,11 +31,20 @@ const transactionSchema = new mongoose.Schema({
         maxlength: [200, "Note cannot be more than 200 characters"],
         required: false
     },
+    // Soft Delete Fields
+    isDeleted: {
+        type: Boolean,
+        default: false
+    },
+    deletedAt: {
+        type: Date,
+        default: null
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     }
-}, {timestamps: true})
+}, { timestamps: true })
 
 const Transaction = mongoose.model('Transaction', transactionSchema)
 

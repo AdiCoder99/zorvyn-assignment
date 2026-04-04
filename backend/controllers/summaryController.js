@@ -5,6 +5,9 @@ import Transaction from '../models/Transaction.js';
 export const getOverviewStats = async (req, res) => {
     try { 
         const stats = await Transaction.aggregate([
+            { 
+                $match: { isDeleted: false } 
+            },
             {
                 $group: {
                     _id: null,
@@ -38,6 +41,9 @@ export const getCategoryWiseTotals = async (req, res) => {
     try {
         const summary = await Transaction.aggregate([
             { 
+                $match: { isDeleted: false } 
+            },
+            { 
                 $group: { 
                     _id: '$category', 
                     totalIncome: { $sum: { $cond: [{ $eq: ['$type', 'income'] }, '$amount', 0] } },
@@ -57,7 +63,7 @@ export const getCategoryWiseTotals = async (req, res) => {
 // API to get the recent transactions
 export const getRecentTransactions = async (req, res) => {
     try{
-        const transactions = await Transaction.find()
+        const transactions = await Transaction.find({ isDeleted: false })
         .sort({ createdAt: -1 })
         .limit(10)
         .populate('createdBy', 'name email');
@@ -71,6 +77,9 @@ export const getRecentTransactions = async (req, res) => {
 export const getSummaryByMonth = async (req, res) => {
     try {
         const summary = await Transaction.aggregate([
+            { 
+                $match: { isDeleted: false } 
+            },
             { 
                 $group: {
                     _id: { month: { $month: '$date' }, year: { $year: '$date' }},
@@ -97,3 +106,4 @@ export const getSummaryByMonth = async (req, res) => {
         res.status(500).json({ message: 'Error fetching summary by month' });
     }
 }
+
