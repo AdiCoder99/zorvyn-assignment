@@ -26,8 +26,26 @@ export const createTransaction = async (req, res) => {
 // API to get all the transaction 
 export const getAllTransactions = async (req, res) => {
     try{
-        const transactions = await Transaction.find().populate('createdBy', 'name email');
-        res.status(200).json(transactions);
+
+        // Pagination
+        const page = parseInt(req.query.page) || 1; 
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+        const transactions = await Transaction.find()
+        .populate('createdBy', 'name email')
+        .sort({ date: -1 }) 
+        .skip(skip)
+        .limit(limit);
+
+        const totalTransactions = await Transaction.countDocuments();
+
+        res.status(200).json({
+            count: transactions.length,
+            total: totalTransactions,
+            page,
+            totalPages: Math.ceil(totalTransactions / limit),
+            data: transactions
+        });
     }
     catch (error){
         res.status(500).json({ message:error.message })
