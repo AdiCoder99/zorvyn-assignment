@@ -94,3 +94,4 @@ export const updateUserStatus = async (req, res) => {
         res.status(500).json({message: "Error updating user status", error: error.message});
     }
 }
+
