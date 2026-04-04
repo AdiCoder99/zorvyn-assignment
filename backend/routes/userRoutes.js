@@ -7,7 +7,7 @@ import { protect } from '../middlewares/protect.js';
 const userRouter = express.Router();
 
 userRouter.post('/create', protect, authorize(['admin']), createUser);
-userRouter.get('/all', protect, authorize(['admin', 'analyst', 'viewer']), getAllUsers);
+userRouter.get('/all', protect, authorize(['admin', 'analyst']), getAllUsers);
 userRouter.put('/update-role/:id', protect, authorize(['admin']), updateUserRole);
 userRouter.put('/update-status/:id', protect, authorize(['admin']), updateUserStatus);
 userRouter.delete('/delete/:id', protect, authorize(['admin']), deleteUser)
