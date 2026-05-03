@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[var(--color-bg-base)]">
       <div className="card w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-[var(--color-text-main)] mb-6 tracking-tight">Sign in to Zorvyn</h1>
+        <h1 className="text-2xl font-bold text-[var(--color-text-main)] mb-6 tracking-tight">Sign in to FinVault</h1>
         {error && <div className="mb-4 p-3 bg-red-50 text-red-700 border border-red-200 text-sm">{error}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

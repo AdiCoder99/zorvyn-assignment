@@ -18,7 +18,7 @@ const Sidebar = () => {
   return (
     <aside className="w-64 bg-[var(--color-bg-surface)] border-r border-[var(--color-border-main)] flex flex-col">
       <div className="h-16 flex items-center px-6 border-b border-[var(--color-border-main)]">
-        <span className="text-lg font-bold text-[var(--color-text-main)] tracking-tight">Zorvyn</span>
+        <span className="text-lg font-bold text-[var(--color-text-main)] tracking-tight">FinVault</span>
       </div>
       <nav className="flex-1 px-4 py-6 space-y-2">
         {navItems.map((item) => {
